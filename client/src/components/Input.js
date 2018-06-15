@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from './Button'
+import { Form } from 'semantic-ui-react'
 
 class InputComponent extends React.Component {
     constructor(props) {
@@ -17,12 +18,16 @@ class InputComponent extends React.Component {
     }
     logIn = () => {
         return (
-            <div className="form">
-                <h1>Please login to view registered Users</h1>
-                <label htmlFor="username">Username</label>
-                <input id="username" name="username" onChange={this.handleChange} value={this.state.username} />
-                <label htmlFor="password">Password</label>
-                <input type="text" id="password" name="password" onChange={this.handleChange} value={this.state.password} />
+            <Form inverted>
+                <h4>Please provide Username and Password to get access to our absolute BANGERS</h4>
+                <Form.Field required>
+                    <label htmlFor="username">Username</label>
+                    <input id="username" name="username" onChange={this.handleChange} value={this.state.username} />
+                </Form.Field>
+                <Form.Field required>
+                    <label htmlFor="password">Password</label>
+                    <input type="text" id="password" name="password" onChange={this.handleChange} value={this.state.password} />
+                </Form.Field>
                 <Button text="Login" function={() => {
                     let user = {
                         username: this.state.username,
@@ -33,18 +38,24 @@ class InputComponent extends React.Component {
                         this.props.fetch()
                     }, 300)
                 }} />
-            </div>
+            </Form>
         )
     }
     signUp = () => {
         return (
-            <div className="form">
-                <label htmlFor="username">Username</label>
-                <input id="username" name="username" onChange={this.handleChange} value={this.state.username} />
-                <label htmlFor="race">Race</label>
-                <input id="race" name="race" onChange={this.handleChange} value={this.state.race} />
-                <label htmlFor="password">Password</label>
-                <input type="text" id="password" name="password" onChange={this.handleChange} value={this.state.password} />
+            <Form inverted>
+                <Form.Field required>
+                    <label htmlFor="username">Username</label>
+                    <input id="username" name="username" onChange={this.handleChange} value={this.state.username} />
+                </Form.Field>
+                {/* <Form.Field>
+                    <label htmlFor="race"><span classname='label'>Race</label>
+                    <input id="race" name="race" onChange={this.handleChange} value={this.state.race} />
+                </Form.Field> */}
+                <Form.Field required>
+                    <label htmlFor="password">Password</label>
+                    <input type="text" id="password" name="password" onChange={this.handleChange} value={this.state.password} />
+                </Form.Field>
                 <Button text="Register" function={() => {
                     let user = {
                         username: this.state.username,
@@ -55,9 +66,8 @@ class InputComponent extends React.Component {
                     setTimeout(() => {
                         this.props.fetch()
                     }, 300)
-                    this.props.history.push('/users')
                 }} />
-            </div>
+            </Form>
         );
     }
     render() {

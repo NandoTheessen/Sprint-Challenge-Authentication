@@ -3,6 +3,7 @@ import { Route, Link, withRouter } from 'react-router-dom'
 import InputComponent from './components/Input'
 import axios from 'axios'
 import { UserList } from './components/UsersList';
+import FirstView from './components/FirstView';
 
 class App extends Component {
   constructor(props) {
@@ -51,12 +52,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h4>Please login or register</h4>
-        <Link to='/login'><button type="button">Login</button></Link>
-        {this.state.loggedin && <Link to='/login'><button type="button" onClick={this.logOut} >LogOut</button></Link>}
-        <Route path="/signup" render={props => <InputComponent {...props} page="signup" register={this.register} fetch={this.fetchUsers} />} />
-        <Route path="/login" render={props => <InputComponent {...props} login={this.login} fetch={this.fetchUsers} />} />
-        <Route path="/jokes" render={props => <UserList {...props} users={this.state.users} loggedin={this.state.loggedin} />} />
+        {this.state.loggedin && <Link to='/'><button id='logout' type="button" onClick={this.logOut}>LogOut</button></Link>}
+        <Route exact path="/" component={FirstView} />
+        <Route exact path="/signup" render={props => <InputComponent {...props} page="signup" register={this.register} fetch={this.fetchUsers} />} />
+        <Route exact path="/login" render={props => <InputComponent {...props} login={this.login} fetch={this.fetchUsers} />} />
+        <Route exact path="/jokes" render={props => <UserList {...props} users={this.state.users} loggedin={this.state.loggedin} />} />
         {/* <Route exact path="/users" render={(props) => (
           this.state.loggedIn ? (
             <UserList {...props} users={this.state.users} />
